@@ -1,0 +1,20 @@
+# Build artifacts
+/build/
+
+# Package store and profiles
+/store/
+/profiles/
+
+# Generated initramfs
+/initramfs*
+*.cpio
+*.cpio.gz
+
+# Logs
+*.log
+
+# Editor temporary files
+*~
+*.swp
+*.swo
+.DS_Store
