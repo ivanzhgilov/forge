@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-26.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y guile-3.0 make
+
+      - name: Run tests
+        run: make test
