@@ -1,7 +1,7 @@
 GUILE ?= guile
 MAIN := src/main.scm
 
-.PHONY: run help version
+.PHONY: run help version test
 
 run:
 	$(GUILE) -L src -L . $(MAIN) $(ARGS)
@@ -11,3 +11,6 @@ help:
 
 version:
 	$(GUILE) -L src -L . $(MAIN) --version
+
+test:
+	$(GUILE) -L src tests/version.scm
