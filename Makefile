@@ -4,10 +4,10 @@ MAIN := src/main.scm
 .PHONY: run help version
 
 run:
-	$(GUILE) -L src $(MAIN) $(ARGS)
+	$(GUILE) -L src -L . $(MAIN) $(ARGS)
 
 help:
-	$(GUILE) -L src $(MAIN) --help
+	$(GUILE) -L src -L . $(MAIN) --help
 
 version:
-	$(GUILE) -L src $(MAIN) --version
+	$(GUILE) -L src -L . $(MAIN) --version
