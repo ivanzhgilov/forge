@@ -2,11 +2,11 @@
 
 GUILE ?= guile
 SRC_DIR ?= src
-TEST_DIR ?= tests
 MAIN ?= $(SRC_DIR)/main.scm
-
 GUILE_FLAGS ?= -L $(SRC_DIR) -L .
-TEST_FILES ?= $(sort $(wildcard $(TEST_DIR)/*.scm))
+
+TEST_RUNNER ?= tests/run.scm
+TEST_LOG ?= logs/test.log
 
 .PHONY: run help version test
 
@@ -20,12 +20,5 @@ version:
 	$(GUILE) $(GUILE_FLAGS) $(MAIN) --version
 
 test:
-	@set -e; \
-	if [ -z "$(strip $(TEST_FILES))" ]; then \
-		printf 'No test files found in %s\n' '$(TEST_DIR)' >&2; \
-		exit 1; \
-	fi; \
-	for test_file in $(TEST_FILES); do \
-		printf '\n==> %s\n' "$$test_file"; \
-		$(GUILE) $(GUILE_FLAGS) "$$test_file"; \
-	done
+	@mkdir -p "$(dir $(TEST_LOG))"
+	$(GUILE) $(GUILE_FLAGS) $(TEST_RUNNER) "$(TEST_LOG)"
