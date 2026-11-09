@@ -14,3 +14,4 @@ version:
 
 test:
 	$(GUILE) -L src tests/version.scm
+	$(GUILE) -L src tests/dependency.scm
