@@ -7,5 +7,6 @@
   (exit
     (run-tests
       (if (null? arguments)
-          "logs/test.log"
-          (car arguments)))))
+        "logs/test.log"
+        (car arguments)))))
+
