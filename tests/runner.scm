@@ -4,6 +4,7 @@
   #:use-module (srfi srfi-64)
   #:use-module (tests version)
   #:use-module (tests dependency)
+  #:use-module (tests package)
   #:export (run-tests))
 
 (define (result-label kind)
@@ -87,7 +88,8 @@
 
         (test-with-runner runner
           (run-version-tests)
-          (run-dependency-tests))
+          (run-dependency-tests)
+          (run-package-tests))
 
         (write-summary log-port runner)
         (force-output log-port)
