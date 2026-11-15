@@ -2,10 +2,10 @@
   #:use-module (srfi srfi-9)
   #:use-module (forge version)
   #:export (make-dependency
-            dependency?
-            dependency-name
-            dependency-constraint
-            dependency-kind))
+             dependency?
+             dependency-name
+             dependency-constraint
+             dependency-kind))
 
 (define-record-type <dependency>
   (%make-dependency name constraint kind)

@@ -9,7 +9,7 @@
   (let* ((dependency
            (make-dependency
              "hello"
-             (version-at-least "1.0")
+             (version-at-least (string->version "1.0"))
              'runtime))
          (package
            (make-package

@@ -5,9 +5,9 @@
              version-components
              %make-version-constraint
              version-constraint?
-             constraint-lower
+             constraint-lower-version
              constraint-lower-inclusive?
-             constraint-upper
+             constraint-upper-version
              constraint-upper-inclusive?))
 
 (define-record-type <version>
@@ -16,10 +16,10 @@
   (components version-components))
 
 (define-record-type <version-constraint>
-  (%make-version-constraint lower lower-inclusive?
-                            upper upper-inclusive?)
+  (%make-version-constraint lower-version lower-inclusive?
+                            upper-version upper-inclusive?)
   version-constraint?
-  (lower constraint-lower)
+  (lower-version constraint-lower-version)
   (lower-inclusive? constraint-lower-inclusive?)
-  (upper constraint-upper)
+  (upper-version constraint-upper-version)
   (upper-inclusive? constraint-upper-inclusive?))
