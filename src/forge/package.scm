@@ -1,27 +1,15 @@
 (define-module (forge package)
-  #:use-module (srfi srfi-1)
-  #:use-module (srfi srfi-9)
-  #:use-module (forge dependency)
+  #:use-module ((forge package types) #:prefix types:)
   #:export (make-package
-            package?
-            package-name
-            package-version
-            package-source
-            package-dependencies))
+             package?
+             package-name
+             package-version
+             package-source
+             package-dependencies))
 
-(define-record-type <package>
-  (%make-package name version source dependencies)
-  package?
-  (name package-name)
-  (version package-version)
-  (source package-source)
-  (dependencies package-dependencies))
-
-(define (make-package name version source dependencies)
-  (unless (and (list? dependencies)
-               (every dependency? dependencies))
-    (error "package dependencies must be a list of dependencies"
-           dependencies))
-
-  (%make-package name version source dependencies))
-
+(define make-package types:make-package)
+(define package? types:package?)
+(define package-name types:package-name)
+(define package-version types:package-version)
+(define package-source types:package-source)
+(define package-dependencies types:package-dependencies)
