@@ -6,15 +6,16 @@
   #:export (run-tests))
 
 (define (run-tests)
-  (let* ((dependency
+  (let* ((version (string->version "1.0.0"))
+         (dependency
            (make-dependency
              "hello"
-             (version-at-least "1.0")
+             (version-at-least (string->version "1.0"))
              'runtime))
          (package
            (make-package
              "greeting"
-             "1.0.0"
+             version
              "./sources/greeting"
              (list dependency))))
 
@@ -27,9 +28,12 @@
                 "greeting"
                 (package-name package))
 
+    (test-assert "package version is a version object"
+                 (version? (package-version package)))
+
     (test-equal "package version"
                 "1.0.0"
-                (package-version package))
+                (version->string (package-version package)))
 
     (test-eq "package dependency"
              dependency
@@ -38,13 +42,25 @@
     (test-equal "package without dependencies"
                 '()
                 (package-dependencies
-                  (make-package "empty" "1.0" "./sources/empty" '())))
+                  (make-package
+                    "empty"
+                    (string->version "1.0")
+                    "./sources/empty"
+                    '())))
+
+    (test-error "reject string version"
+                #t
+                (make-package
+                  "invalid"
+                  "1.0"
+                  "./sources/invalid"
+                  '()))
 
     (test-error "reject non-dependency elements"
                 #t
                 (make-package
                   "invalid"
-                  "1.0"
+                  (string->version "1.0")
                   "./sources/invalid"
                   (list "hello")))
 
@@ -52,7 +68,7 @@
                 #t
                 (make-package
                   "invalid"
-                  "1.0"
+                  (string->version "1.0")
                   "./sources/invalid"
                   'invalid))
 
@@ -60,7 +76,7 @@
                 #t
                 (make-package
                   "invalid"
-                  "1.0"
+                  (string->version "1.0")
                   "./sources/invalid"
                   (cons dependency 'invalid)))
 

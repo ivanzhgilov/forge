@@ -1,11 +1,11 @@
 (define-module (packages hello)
   #:use-module (forge package)
+  #:use-module (forge version)
   #:export (package))
 
 (define package
   (make-package
     "hello"
-    "1.0"
+    (string->version "1.0")
     "./sources/hello"
     '()))
-
