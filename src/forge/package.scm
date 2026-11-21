@@ -1,4 +1,5 @@
 (define-module (forge package)
+  #:use-module (srfi srfi-1)
   #:use-module ((forge package types) #:prefix types:)
   #:use-module ((forge package scanner) #:prefix scanner:)
   #:use-module ((forge package loader) #:prefix loader:)
@@ -13,7 +14,8 @@
              load-package-recipe
              make-package-catalog
              package-catalog?
-             package-catalog-find))
+             package-catalog-find
+             load-package-catalog directory))
 
 (define make-package types:make-package)
 (define package? types:package?)
@@ -29,3 +31,9 @@
 (define make-package-catalog catalog:make-package-catalog)
 (define package-catalog? catalog:package-catalog?)
 (define package-catalog-find catalog:package-catalog-find)
+
+(define (load-package-catalog directory)
+  (let* ((recipe-paths (scan-package-recipes directory))
+         (packages
+           (append-map load-package-recipe recipe-paths)))
+    (make-package-catalog packages)))

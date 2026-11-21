@@ -10,13 +10,13 @@
 
     (test-equal "find recipes recursively"
                 (list
-                  (string-append root "/core/system.scm")
-                  (string-append root "/development/compiler.scm")
                   (string-append root "/invalid/improper-list.scm")
                   (string-append root "/invalid/invalid-element.scm")
                   (string-append root "/invalid/missing-export.scm")
                   (string-append root "/invalid/no-module.scm")
-                  (string-append root "/invalid/non-list.scm"))
+                  (string-append root "/invalid/non-list.scm")
+                  (string-append root "/valid/core/system.scm")
+                  (string-append root "/valid/development/compiler.scm"))
                 (scan-package-recipes root))
 
     (test-equal "ignore non-scheme files"

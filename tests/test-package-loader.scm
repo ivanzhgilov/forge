@@ -15,7 +15,7 @@
 
   (let ((packages
           (load-package-recipe
-            (fixture "core/system.scm"))))
+            (fixture "valid/core/system.scm"))))
 
     (test-equal "load multiple packages"
                 2
@@ -38,7 +38,7 @@
 
   (let ((packages
           (load-package-recipe
-            (fixture "development/compiler.scm"))))
+            (fixture "valid/development/compiler.scm"))))
 
     (test-equal "load single package"
                 1
@@ -50,7 +50,7 @@
 
   (let ((module-before (current-module)))
     (load-package-recipe
-      (fixture "core/system.scm"))
+      (fixture "valid/core/system.scm"))
 
     (test-eq "restore current module after loading"
              module-before
