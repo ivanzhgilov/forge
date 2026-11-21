@@ -2,6 +2,7 @@
   #:use-module ((forge package types) #:prefix types:)
   #:use-module ((forge package scanner) #:prefix scanner:)
   #:use-module ((forge package loader) #:prefix loader:)
+  #:use-module ((forge package catalog) #:prefix catalog:)
   #:export (make-package
              package?
              package-name
@@ -9,7 +10,10 @@
              package-source
              package-dependencies
              scan-package-recipes
-             load-package-recipe))
+             load-package-recipe
+             make-package-catalog
+             package-catalog?
+             package-catalog-find))
 
 (define make-package types:make-package)
 (define package? types:package?)
@@ -21,3 +25,7 @@
 (define scan-package-recipes scanner:scan-package-recipes)
 
 (define load-package-recipe loader:load-package-recipe)
+
+(define make-package-catalog catalog:make-package-catalog)
+(define package-catalog? catalog:package-catalog?)
+(define package-catalog-find catalog:package-catalog-find)
