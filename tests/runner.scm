@@ -1,4 +1,3 @@
-
 (define-module (tests runner)
   #:use-module (ice-9 format)
   #:use-module (ice-9 ftw)

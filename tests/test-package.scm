@@ -27,6 +27,21 @@
     (test-equal "package name"
                 "greeting"
                 (package-name package))
+    (test-error "reject non-string package name"
+                #t
+                (make-package
+                  123
+                  version
+                  "./sources/invalid"
+                  '()))
+
+    (test-error "reject empty package name"
+                #t
+                (make-package
+                  ""
+                  version
+                  "./sources/invalid"
+                  '()))
 
     (test-assert "package version is a version object"
                  (version? (package-version package)))
@@ -34,6 +49,22 @@
     (test-equal "package version"
                 "1.0.0"
                 (version->string (package-version package)))
+
+    (test-error "reject non-string package source"
+                #t
+                (make-package
+                  "invalid"
+                  version
+                  123
+                  '()))
+
+    (test-error "reject empty package source"
+                #t
+                (make-package
+                  "invalid"
+                  version
+                  ""
+                  '()))
 
     (test-eq "package dependency"
              dependency

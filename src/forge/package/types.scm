@@ -18,9 +18,19 @@
   (source package-source)
   (dependencies package-dependencies))
 
+(define (non-empty-string? value)
+  (and (string? value)
+       (> (string-length value) 0)))
+
 (define (make-package name version source dependencies)
+  (unless (non-empty-string? name)
+    (error "package name must be a non-empty string" name))
+
   (unless (version? version)
     (error "package version must be a version object" version))
+
+  (unless (non-empty-string? source)
+    (error "package source must be a non-empty string" source))
 
   (unless (and (list? dependencies)
                (every dependency? dependencies))
